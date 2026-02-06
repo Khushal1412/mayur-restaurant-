@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Random Image</title>
+    <style>
+        /* 1. Basic Reset & Background */
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+        }
+
+        /* 2. Container Styling */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            border: 1px border rgba(255, 255, 255, 0.2);
+            max-width: 90%;
+        }
+
+        /* 3. Image Styling & Animation */
+        #myImage {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            object-fit: cover; /* Prevents stretching */
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            opacity: 0; /* Start hidden for animation */
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        h2 {
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* 4. Helper class to trigger the fade-in */
+        .fade-in {
+            opacity: 1 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Daily Inspiration</h2>
+        <img id="myImage" src="" alt="Random Gallery Image">
+        <p>Refresh the page to see something new.</p>
+    </div>
+
+    <script>
+        const images = [
+            'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80',
+            'https://images.unsplash.com/photo-1426604966148-8e85a5a94ca2?auto=format&fit=crop&w=800&q=80'
+        ];
+
+        function changeImage() {
+            const imgElement = document.getElementById('myImage');
+            const randomIndex = Math.floor(Math.random() * images.length);
+            
+            // Set the source
+            imgElement.src = images[randomIndex];
+
+            // Wait for image to load before fading in
+            imgElement.onload = function() {
+                imgElement.classList.add('fade-in');
+            };
+        }
+
+        window.onload = changeImage;
+    </script>
+</body>
+</html>
